@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attendance Check-in</title>
+</head>
+<body>
+  <h2>Checking location…</h2>
+
+  <script>
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const acc = position.coords.accuracy;
+          const date = new Date().toISOString().split("T")[0];
+
+          const formUrl =
+"https://docs.google.com/forms/d/1A-k5dKChvQwTt7jbGhR5tvmY8YKczw0i2D7I_d9wioo/viewform?usp=pp_url" +          
+            "&entry.803429932=" + lat +
+            "&entry.390304849=" + lng +
+            "&entry.1544002580=" + acc +
+            "&entry.1509018798=" + date;
+
+          window.location.href = formUrl;
+        },
+        function(error) {
+          alert("Location access denied. Please allow GPS.");
+        }
+      );
+    } else {
+      alert("Geolocation not supported.");
+    }
+  </script>
+</body>
+</html>
